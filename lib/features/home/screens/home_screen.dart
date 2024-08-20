@@ -89,6 +89,17 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
         ),
       ),
       appBar: AppBar(
+        leading: Builder(
+          builder: (context) =>
+              IconButton(
+                icon: Image.asset(
+                  'lib/assets/menu.png',
+                  width: 24, // Adjust the size as needed
+                  height: 24,
+                ),
+            onPressed: () => Scaffold.of(context).openDrawer(),
+          ),
+        ),
         elevation: 0,
         backgroundColor: Colors.white,
         centerTitle: true,
@@ -130,4 +141,3 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
     );
   }
 }
-
