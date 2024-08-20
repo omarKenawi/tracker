@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "862449110974",
+    "project_id": "expanse-task",
+    "storage_bucket": "expanse-task.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:862449110974:android:458ac936cd553239f4f3ef",
+        "android_client_info": {
+          "package_name": "com.example.tracker"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDkQ3Ja38oIZgJMaos5YezequouJy8Cve0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
