@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:tracker/features/home/screens/home_screen.dart';
 import '../services/firebase_auth_services.dart';
 import '../widgets/form_container_widget.dart';
 
@@ -122,8 +123,7 @@ class _LoginPageState extends State<LoginScreen> {
     });
 
     if (user != null) {
-      // Navigate to the Home screen
-      Navigator.pushReplacementNamed(context, '/home'); // Ensure '/home' route is defined in your app
+      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>const HomeScreen()));
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text('Login failed. Please try again.')),

@@ -22,7 +22,6 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         useMaterial3: true,
       ),
-      // Set the home screen and define named routes
       initialRoute: '/',
       routes: {
         '/': (context) => const LoginScreen(),
