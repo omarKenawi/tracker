@@ -14,17 +14,16 @@ class _LoginPageState extends State<LoginScreen> {
   bool _isSigning = false;
 
   final FirebaseAuthServices _auth = FirebaseAuthServices();
-  final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
-
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-
-  TextEditingController _emailController = TextEditingController();
-  TextEditingController _passwordController = TextEditingController();
+  final FocusNode _passwordFocusNode = FocusNode();
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
 
   @override
   void dispose() {
     _emailController.dispose();
     _passwordController.dispose();
+    _passwordFocusNode.dispose(); // Dispose of the FocusNode
     super.dispose();
   }
 
@@ -48,33 +47,17 @@ class _LoginPageState extends State<LoginScreen> {
                   children: [
                     FormContainerWidget(
                       controller: _emailController,
+                      focusNode: FocusNode(), // Optional if you need explicit control
+                      nextFocusNode: _passwordFocusNode,
                       hintText: "Email",
                       isPasswordField: false,
-                      validator: (value) {
-                        if (value == null || value.isEmpty) {
-                          return 'Please enter your email';
-                        }
-                        final emailRegex = RegExp(r'^[^@]+@[^@]+\.[^@]+');
-                        if (!emailRegex.hasMatch(value)) {
-                          return 'Please enter a valid email address';
-                        }
-                        return null;
-                      },
                     ),
                     const SizedBox(height: 10),
                     FormContainerWidget(
                       controller: _passwordController,
+                      focusNode: _passwordFocusNode, // Set the focus node
                       hintText: "Password",
                       isPasswordField: true,
-                      validator: (value) {
-                        if (value == null || value.isEmpty) {
-                          return 'Please enter your password';
-                        }
-                        if (value.length < 6) {
-                          return 'Password must be at least 6 characters long';
-                        }
-                        return null;
-                      },
                     ),
                   ],
                 ),
@@ -82,6 +65,9 @@ class _LoginPageState extends State<LoginScreen> {
               const SizedBox(height: 30),
               GestureDetector(
                 onTap: () {
+                  // Unfocus to hide the keyboard
+                  FocusScope.of(context).unfocus();
+
                   if (_formKey.currentState?.validate() ?? false) {
                     _signIn();
                   } else {
@@ -136,7 +122,8 @@ class _LoginPageState extends State<LoginScreen> {
     });
 
     if (user != null) {
-      print('Login successful');
+      // Navigate to the Home screen
+      Navigator.pushReplacementNamed(context, '/home'); // Ensure '/home' route is defined in your app
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text('Login failed. Please try again.')),

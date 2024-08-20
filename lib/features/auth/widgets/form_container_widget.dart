@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 
 class FormContainerWidget extends StatefulWidget {
   final TextEditingController? controller;
+  final FocusNode? focusNode;
+  final FocusNode? nextFocusNode;
   final Key? fieldKey;
   final bool? isPasswordField;
   final String? hintText;
@@ -15,6 +17,8 @@ class FormContainerWidget extends StatefulWidget {
   const FormContainerWidget({
     super.key,
     this.controller,
+    this.focusNode,
+    this.nextFocusNode,
     this.isPasswordField,
     this.fieldKey,
     this.hintText,
@@ -33,6 +37,7 @@ class FormContainerWidget extends StatefulWidget {
 class _FormContainerWidgetState extends State<FormContainerWidget> {
   bool _obscureText = true;
 
+  // Email validator
   String? emailValidator(String? value) {
     if (value == null || value.isEmpty) {
       return 'Email cannot be empty';
@@ -66,6 +71,7 @@ class _FormContainerWidgetState extends State<FormContainerWidget> {
       child: TextFormField(
         style: const TextStyle(color: Colors.black),
         controller: widget.controller,
+        focusNode: widget.focusNode,
         keyboardType: widget.inputType,
         key: widget.fieldKey,
         obscureText: widget.isPasswordField == true ? _obscureText : false,
@@ -74,7 +80,14 @@ class _FormContainerWidgetState extends State<FormContainerWidget> {
             (widget.isPasswordField == true
                 ? passwordValidator
                 : emailValidator),
-        onFieldSubmitted: widget.onFieldSubmitted,
+        onFieldSubmitted: (value) {
+          if (widget.nextFocusNode != null) {
+            FocusScope.of(context).requestFocus(widget.nextFocusNode);
+          }
+          if (widget.onFieldSubmitted != null) {
+            widget.onFieldSubmitted!(value);
+          }
+        },
         decoration: InputDecoration(
           border: InputBorder.none,
           filled: true,

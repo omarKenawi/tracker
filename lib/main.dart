@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:tracker/firebase_options.dart';
-import 'package:tracker/screens/login_screen.dart';
+import 'package:tracker/features/auth/screens/login_screen.dart';
+import 'package:tracker/features/home/screens/home_screen.dart';
 
-Future <void> main() async{
+Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlatform
+    options: DefaultFirebaseOptions.currentPlatform,
   );
   runApp(const MyApp());
 }
-
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -18,14 +18,17 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'Expense Tracker',
       theme: ThemeData(
-        // useMaterial3: true,
+        useMaterial3: true,
       ),
-      home: const LoginScreen(),
+      // Set the home screen and define named routes
+      initialRoute: '/',
+      routes: {
+        '/': (context) => const LoginScreen(),
+        '/home': (context) => const HomeScreen(),
+      },
       debugShowCheckedModeBanner: false,
     );
   }
 }
-
-
