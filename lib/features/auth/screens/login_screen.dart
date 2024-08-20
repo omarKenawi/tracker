@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:tracker/features/home/screens/home_screen.dart';
 import '../services/firebase_auth_services.dart';
 import '../widgets/form_container_widget.dart';
@@ -24,7 +25,7 @@ class _LoginPageState extends State<LoginScreen> {
   void dispose() {
     _emailController.dispose();
     _passwordController.dispose();
-    _passwordFocusNode.dispose(); // Dispose of the FocusNode
+    _passwordFocusNode.dispose();
     super.dispose();
   }
 
@@ -33,37 +34,40 @@ class _LoginPageState extends State<LoginScreen> {
     return Scaffold(
       body: Center(
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 15),
+          padding: EdgeInsets.symmetric(horizontal: 15.w), // Responsive padding
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              const Text(
+              Text(
                 "Login",
-                style: TextStyle(fontSize: 27, fontWeight: FontWeight.bold),
+                style: TextStyle(
+                  fontSize: 27.sp, // Responsive font size
+                  fontWeight: FontWeight.bold,
+                ),
               ),
-              const SizedBox(height: 30),
+              SizedBox(height: 30.h), // Responsive spacing
               Form(
                 key: _formKey,
                 child: Column(
                   children: [
                     FormContainerWidget(
                       controller: _emailController,
-                      focusNode: FocusNode(), // Optional if you need explicit control
+                      focusNode: FocusNode(),
                       nextFocusNode: _passwordFocusNode,
                       hintText: "Email",
                       isPasswordField: false,
                     ),
-                    const SizedBox(height: 10),
+                    SizedBox(height: 10.h), // Responsive spacing
                     FormContainerWidget(
                       controller: _passwordController,
-                      focusNode: _passwordFocusNode, // Set the focus node
+                      focusNode: _passwordFocusNode,
                       hintText: "Password",
                       isPasswordField: true,
                     ),
                   ],
                 ),
               ),
-              const SizedBox(height: 30),
+              SizedBox(height: 30.h), // Responsive spacing
               GestureDetector(
                 onTap: () {
                   // Unfocus to hide the keyboard
@@ -79,28 +83,29 @@ class _LoginPageState extends State<LoginScreen> {
                 },
                 child: Container(
                   width: double.infinity,
-                  height: 45,
+                  height: 45.h, // Responsive height
                   decoration: BoxDecoration(
                     color: Colors.blue,
-                    borderRadius: BorderRadius.circular(10),
+                    borderRadius: BorderRadius.circular(10.r), // Responsive radius
                   ),
                   child: Center(
                     child: _isSigning
                         ? const CircularProgressIndicator(
                       color: Colors.white,
                     )
-                        : const Text(
+                        : Text(
                       "Login",
                       style: TextStyle(
                         color: Colors.white,
                         fontWeight: FontWeight.bold,
+                        fontSize: 16.sp, // Responsive font size
                       ),
                     ),
                   ),
                 ),
               ),
-              const SizedBox(height: 10),
-              const SizedBox(height: 20),
+              SizedBox(height: 10.h), // Responsive spacing
+              SizedBox(height: 20.h), // Responsive spacing
             ],
           ),
         ),
@@ -123,7 +128,10 @@ class _LoginPageState extends State<LoginScreen> {
     });
 
     if (user != null) {
-      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>const HomeScreen()));
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context) => const HomeScreen()),
+      );
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text('Login failed. Please try again.')),

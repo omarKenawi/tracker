@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class FormContainerWidget extends StatefulWidget {
   final TextEditingController? controller;
@@ -66,10 +67,13 @@ class _FormContainerWidgetState extends State<FormContainerWidget> {
       width: double.infinity,
       clipBehavior: Clip.hardEdge,
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(10),
+        borderRadius: BorderRadius.circular(10.r), // Responsive border radius
       ),
       child: TextFormField(
-        style: const TextStyle(color: Colors.black),
+        style: TextStyle(
+          color: Colors.black,
+          fontSize: 16.sp, // Responsive font size
+        ),
         controller: widget.controller,
         focusNode: widget.focusNode,
         keyboardType: widget.inputType,
@@ -92,7 +96,10 @@ class _FormContainerWidgetState extends State<FormContainerWidget> {
           border: InputBorder.none,
           filled: true,
           hintText: widget.hintText,
-          hintStyle: const TextStyle(color: Colors.black45),
+          hintStyle: TextStyle(
+            color: Colors.black45,
+            fontSize: 14.sp, // Responsive hint text size
+          ),
           suffixIcon: widget.isPasswordField == true
               ? GestureDetector(
             onTap: () {
@@ -103,9 +110,10 @@ class _FormContainerWidgetState extends State<FormContainerWidget> {
             child: Icon(
               _obscureText ? Icons.visibility_off : Icons.visibility,
               color: _obscureText == false ? Colors.blue : Colors.grey,
+              size: 20.sp, // Responsive icon size
             ),
           )
-              : const Text(""),
+              : const SizedBox.shrink(),
         ),
       ),
     );

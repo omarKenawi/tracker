@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:tracker/features/home/screens/settings_screen.dart';
-
-import 'balance_screen.dart';
-import 'expenses_screen.dart';
+import 'package:tracker/features/home/screens/balance_screen.dart';
+import 'package:tracker/features/home/screens/expenses_screen.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -41,17 +41,17 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
       drawer: Drawer(
         child: Column(
           children: <Widget>[
-            const SizedBox(height: 50),
+            SizedBox(height: 50.h),
             Expanded(
               child: ListView(
                 padding: EdgeInsets.zero,
                 children: <Widget>[
                   ListTile(
-                    contentPadding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+                    contentPadding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 8.h),
                     title: Text(
                       'Expenses',
                       style: TextStyle(
-                        fontSize: 18,
+                        fontSize: 18.sp,
                         color: Colors.black,
                         fontWeight: _selectedIndex == 0 ? FontWeight.bold : FontWeight.normal,
                       ),
@@ -59,11 +59,11 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
                     onTap: () => _onDrawerItemSelected(0),
                   ),
                   ListTile(
-                    contentPadding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+                    contentPadding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 8.h),
                     title: Text(
                       'Balance',
                       style: TextStyle(
-                        fontSize: 18,
+                        fontSize: 18.sp,
                         color: Colors.black,
                         fontWeight: _selectedIndex == 1 ? FontWeight.bold : FontWeight.normal,
                       ),
@@ -71,11 +71,11 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
                     onTap: () => _onDrawerItemSelected(1),
                   ),
                   ListTile(
-                    contentPadding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+                    contentPadding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 8.h),
                     title: Text(
                       'Settings',
                       style: TextStyle(
-                        fontSize: 18,
+                        fontSize: 18.sp,
                         color: Colors.black,
                         fontWeight: _selectedIndex == 2 ? FontWeight.bold : FontWeight.normal,
                       ),
@@ -90,30 +90,29 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
       ),
       appBar: AppBar(
         leading: Builder(
-          builder: (context) =>
-              IconButton(
-                icon: Image.asset(
-                  'lib/assets/menu.png',
-                  width: 24, // Adjust the size as needed
-                  height: 24,
-                ),
+          builder: (context) => IconButton(
+            icon: Image.asset(
+              'assets/images/drawer_icon.png', // Your custom drawer icon
+              width: 24.w,
+              height: 24.h,
+            ),
             onPressed: () => Scaffold.of(context).openDrawer(),
           ),
         ),
         elevation: 0,
         backgroundColor: Colors.white,
         centerTitle: true,
-        title: const Text(
+        title: Text(
           'Overview',
           style: TextStyle(
             fontWeight: FontWeight.bold,
             color: Colors.black,
+            fontSize: 20.sp,
           ),
         ),
         bottom: TabBar(
           controller: _tabController,
           indicatorColor: Colors.transparent,
-          dividerColor: Colors.white,
           labelColor: Colors.black,
           unselectedLabelColor: Colors.grey,
           tabs: const [
@@ -121,12 +120,12 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
             Tab(text: 'BALANCE'),
             Tab(text: 'SETTINGS'),
           ],
-          labelStyle: const TextStyle(
-            fontSize: 18,
+          labelStyle: TextStyle(
+            fontSize: 18.sp,
             fontWeight: FontWeight.bold,
           ),
-          unselectedLabelStyle: const TextStyle(
-            fontSize: 16,
+          unselectedLabelStyle: TextStyle(
+            fontSize: 16.sp,
           ),
         ),
       ),

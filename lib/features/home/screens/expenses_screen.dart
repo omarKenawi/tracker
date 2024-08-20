@@ -6,8 +6,14 @@ class ExpensesScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const Scaffold(
-      body: Center(
-        child: Text('Expenses'),
+      backgroundColor: Colors.white,
+      body: Column(
+        children: [
+
+          Center(
+            child: Text('Expenses'),
+          ),
+        ],
       ),
     );
   }
