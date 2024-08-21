@@ -3,6 +3,7 @@ import 'package:tracker/features/home/screens/settings_screen.dart';
 import 'package:tracker/features/home/screens/balance_screen.dart';
 import 'package:tracker/features/home/screens/expenses_screen.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import '../widgets/custom_drawer.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -38,56 +39,7 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      drawer: Drawer(
-        child: Column(
-          children: <Widget>[
-            SizedBox(height: 50.h),
-            Expanded(
-              child: ListView(
-                padding: EdgeInsets.zero,
-                children: <Widget>[
-                  ListTile(
-                    contentPadding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 8.h),
-                    title: Text(
-                      'Expenses',
-                      style: TextStyle(
-                        fontSize: 18.sp,
-                        color: Colors.black,
-                        fontWeight: _selectedIndex == 0 ? FontWeight.bold : FontWeight.normal,
-                      ),
-                    ),
-                    onTap: () => _onDrawerItemSelected(0),
-                  ),
-                  ListTile(
-                    contentPadding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 8.h),
-                    title: Text(
-                      'Balance',
-                      style: TextStyle(
-                        fontSize: 18.sp,
-                        color: Colors.black,
-                        fontWeight: _selectedIndex == 1 ? FontWeight.bold : FontWeight.normal,
-                      ),
-                    ),
-                    onTap: () => _onDrawerItemSelected(1),
-                  ),
-                  ListTile(
-                    contentPadding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 8.h),
-                    title: Text(
-                      'Settings',
-                      style: TextStyle(
-                        fontSize: 18.sp,
-                        color: Colors.black,
-                        fontWeight: _selectedIndex == 2 ? FontWeight.bold : FontWeight.normal,
-                      ),
-                    ),
-                    onTap: () => _onDrawerItemSelected(2),
-                  ),
-                ],
-              ),
-            ),
-          ],
-        ),
-      ),
+      drawer: CustomDrawer(), // Use the custom drawer
       appBar: AppBar(
         leading: Builder(
           builder: (context) => IconButton(
@@ -133,14 +85,12 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
       body: TabBarView(
         controller: _tabController,
         physics: const NeverScrollableScrollPhysics(),
-
         children: const [
           ExpensesScreen(),
           BalanceScreen(),
           SettingsScreen(),
         ],
       ),
-
     );
   }
 }
