@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import '../widgets/budget_progress.dart';
 import '../widgets/custom_drawer.dart';
+import '../widgets/financial_row.dart';
 
 class DetailsScreen extends StatelessWidget {
   const DetailsScreen({super.key});
@@ -32,6 +34,73 @@ class DetailsScreen extends StatelessWidget {
             onPressed: () => Scaffold.of(context).openDrawer(),
           ),
         ),
+      ),
+      body: Column(
+        children: [
+          Padding(
+            padding: const EdgeInsets.all(12.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  'ACCOUNTS',
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 17.sp,
+                  ),
+                ),
+                SizedBox(
+                  height: 5.h,
+                ),
+                FinancialRow(
+                  label: 'Cash',
+                  value: '\$16,875',
+                  labelStyle: TextStyle(
+                    fontWeight: FontWeight.normal,
+                    fontSize: 18.sp,
+                    color: Colors.grey,
+                  ),
+                  valueStyle: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 22.sp,
+                    color:
+                        const Color(0xff1951d1), // This is the correct format
+                  ),
+                ),
+                FinancialRow(
+                  label: 'Credit Debt',
+                  value: '-\$3,250',
+                  labelStyle: TextStyle(
+                    fontWeight: FontWeight.normal,
+                    fontSize: 18.sp,
+                    color: Colors.grey,
+                  ),
+                  valueStyle: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 22.sp,
+                    color:
+                    const Color(0xff000000), // This is the correct format
+                  ),
+                ),
+                SizedBox(
+                  height: 5.h,
+                ),
+                const Divider(),
+                SizedBox(
+                  height: 5.h,
+                ),
+                BudgetProgress(
+                  percentage: .5,
+                  month: 'March',
+                ),
+                SizedBox(
+                  height: 5.h,
+                ),
+                const Divider(),
+              ],
+            ),
+          )
+        ],
       ),
     );
   }
