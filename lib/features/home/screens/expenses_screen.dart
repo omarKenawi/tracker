@@ -140,7 +140,7 @@ class ExpensesScreen extends StatelessWidget {
                 onPressed: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => const DetailsScreen()),
+                    MaterialPageRoute(builder: (context) =>  DetailsScreen()),
                   );
                 },
                 style: ElevatedButton.styleFrom(

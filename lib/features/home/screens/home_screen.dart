@@ -14,32 +14,18 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateMixin {
   late TabController _tabController;
-  int _selectedIndex = 0;
 
   @override
   void initState() {
     super.initState();
     _tabController = TabController(length: 3, vsync: this);
-    _tabController.addListener(() {
-      setState(() {
-        _selectedIndex = _tabController.index;
-      });
-    });
-  }
-
-  void _onDrawerItemSelected(int index) {
-    setState(() {
-      _selectedIndex = index;
-      _tabController.index = index;
-    });
-    Navigator.of(context).pop();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      drawer: CustomDrawer(), // Use the custom drawer
+      drawer: const CustomDrawer(), // Use the custom drawer
       appBar: AppBar(
         leading: Builder(
           builder: (context) => IconButton(

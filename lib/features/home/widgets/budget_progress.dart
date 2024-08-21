@@ -37,14 +37,14 @@ class BudgetProgress extends StatelessWidget {
         SizedBox(height: 8.h),
         LayoutBuilder(
           builder: (context, constraints) {
-            double progressWidth = constraints.maxWidth * percentage; // Calculate progress width based on percentage
+            double progressWidth = constraints.maxWidth * percentage;
             return Stack(
               clipBehavior: Clip.none,
               children: [
                 Container(
                   height: 25.h,
                   decoration: BoxDecoration(
-                    color: Colors.grey[300],
+                    color: Colors.grey[200],
                     borderRadius: BorderRadius.circular(10.r),
                   ),
                 ),
@@ -52,7 +52,7 @@ class BudgetProgress extends StatelessWidget {
                   width: progressWidth,
                   height: 25.h,
                   decoration: BoxDecoration(
-                    color: Colors.blue,
+                    color: const Color(0xff1951d1),
                     borderRadius: BorderRadius.only(
                       bottomLeft: Radius.circular(10.r),
                       topLeft: Radius.circular(10.r),
@@ -64,7 +64,7 @@ class BudgetProgress extends StatelessWidget {
                   top: 0.h,
                   bottom: -5.h,
                   child: Container(
-                    width: 2.w,
+                    width: 1.w,
                     color: Colors.grey,
                   ),
                 ),

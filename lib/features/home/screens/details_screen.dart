@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../widgets/budget_progress.dart';
+import '../widgets/cash_flow_widget.dart';
 import '../widgets/custom_drawer.dart';
 import '../widgets/financial_row.dart';
 
@@ -79,7 +80,7 @@ class DetailsScreen extends StatelessWidget {
                     fontWeight: FontWeight.bold,
                     fontSize: 22.sp,
                     color:
-                    const Color(0xff000000), // This is the correct format
+                        const Color(0xff000000), // This is the correct format
                   ),
                 ),
                 SizedBox(
@@ -89,9 +90,20 @@ class DetailsScreen extends StatelessWidget {
                 SizedBox(
                   height: 5.h,
                 ),
-                BudgetProgress(
+                const BudgetProgress(
                   percentage: .5,
                   month: 'March',
+                ),
+                SizedBox(
+                  height: 5.h,
+                ),
+                const Divider(),
+                CashFlowWidget(
+                  earnedAmount: 8523,
+                  spentAmount: 2523,
+                  balanceAmount: 6023,
+                  earnedProgressWidth: 80.w,
+                  spentProgressWidth: 50.w, // Example width for spent bar
                 ),
                 SizedBox(
                   height: 5.h,
