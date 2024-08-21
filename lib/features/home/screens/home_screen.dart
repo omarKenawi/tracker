@@ -92,7 +92,7 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
         leading: Builder(
           builder: (context) => IconButton(
             icon: Image.asset(
-              'assets/images/drawer_icon.png', // Your custom drawer icon
+              'lib/assets/menu.png',
               width: 24.w,
               height: 24.h,
             ),
@@ -115,6 +115,7 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
           indicatorColor: Colors.transparent,
           labelColor: Colors.black,
           unselectedLabelColor: Colors.grey,
+          dividerColor: Colors.white,
           tabs: const [
             Tab(text: 'EXPENSES'),
             Tab(text: 'BALANCE'),
@@ -131,12 +132,15 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
       ),
       body: TabBarView(
         controller: _tabController,
+        physics: const NeverScrollableScrollPhysics(), // Disable swipe gesture
+
         children: const [
           ExpensesScreen(),
           BalanceScreen(),
           SettingsScreen(),
         ],
       ),
+
     );
   }
 }

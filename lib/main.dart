@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:tracker/firebase_options.dart';
-import 'package:tracker/features/auth/screens/login_screen.dart';
 import 'package:tracker/features/home/screens/home_screen.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -30,7 +29,7 @@ class MyApp extends StatelessWidget {
           ),
           initialRoute: '/',
           routes: {
-            '/': (context) => const LoginScreen(),
+            '/': (context) => const HomeScreen(),
             '/home': (context) => const HomeScreen(),
           },
           debugShowCheckedModeBanner: false,

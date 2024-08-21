@@ -6,14 +6,15 @@ class CustomDrawer extends StatelessWidget {
   final Function(int) onItemSelected;
 
   const CustomDrawer({
-    Key? key,
+    super.key,
     required this.selectedIndex,
     required this.onItemSelected,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
     return Drawer(
+      elevation: 0,
       child: Column(
         children: <Widget>[
           SizedBox(height: 50.h), // Use ScreenUtil for responsive height
@@ -31,7 +32,10 @@ class CustomDrawer extends StatelessWidget {
                       fontWeight: selectedIndex == 0 ? FontWeight.bold : FontWeight.normal,
                     ),
                   ),
-                  onTap: () => onItemSelected(0),
+                  onTap: () {
+                    onItemSelected(0);
+                    Navigator.of(context).pop(); // Close the drawer after selection
+                  },
                 ),
                 ListTile(
                   contentPadding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 8.h),
@@ -43,7 +47,10 @@ class CustomDrawer extends StatelessWidget {
                       fontWeight: selectedIndex == 1 ? FontWeight.bold : FontWeight.normal,
                     ),
                   ),
-                  onTap: () => onItemSelected(1),
+                  onTap: () {
+                    onItemSelected(1);
+                    Navigator.of(context).pop(); // Close the drawer after selection
+                  },
                 ),
                 ListTile(
                   contentPadding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 8.h),
@@ -55,7 +62,10 @@ class CustomDrawer extends StatelessWidget {
                       fontWeight: selectedIndex == 2 ? FontWeight.bold : FontWeight.normal,
                     ),
                   ),
-                  onTap: () => onItemSelected(2),
+                  onTap: () {
+                    onItemSelected(2);
+                    Navigator.of(context).pop(); // Close the drawer after selection
+                  },
                 ),
               ],
             ),
