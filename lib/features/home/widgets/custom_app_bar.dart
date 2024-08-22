@@ -16,8 +16,8 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
         builder: (context) => IconButton(
           icon: Image.asset(
             'lib/assets/menu.png',
-            width: 24.w,  // Responsive width
-            height: 24.h, // Responsive height
+            width: 24.w,
+            height: 24.h,
           ),
           onPressed: () => Scaffold.of(context).openDrawer(),
         ),
@@ -30,7 +30,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
         style: TextStyle(
           fontWeight: FontWeight.bold,
           color: Colors.black,
-          fontSize: 20.sp, // Responsive font size
+          fontSize: 20.sp,
         ),
       ),
       bottom: TabBar(

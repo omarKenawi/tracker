@@ -6,7 +6,6 @@ import 'package:tracker/features/home/widgets/progress_bar_widget.dart';
 class CashFlowWidget extends StatelessWidget {
   final int earnedAmount;
   final int spentAmount;
-  final int balanceAmount;
   final double earnedProgressWidth;
   final double spentProgressWidth;
 
@@ -14,7 +13,6 @@ class CashFlowWidget extends StatelessWidget {
     super.key,
     required this.earnedAmount,
     required this.spentAmount,
-    required this.balanceAmount,
     required this.earnedProgressWidth,
     required this.spentProgressWidth,
   });

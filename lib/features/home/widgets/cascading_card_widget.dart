@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import '../models/expenses_model.dart';
 import 'visa_card.dart';
 
 class CascadingCardWidget extends StatelessWidget {
-  const CascadingCardWidget({super.key});
+  const CascadingCardWidget({super.key, required this.expense});
+  final Expense expense;
 
   @override
   Widget build(BuildContext context) {
@@ -50,7 +52,7 @@ class CascadingCardWidget extends StatelessWidget {
             ),
             VisaCard(
               month: 'September',
-              amount: '\$3,250',
+              amount: '\$${expense.dept}',
               color: const Color(0xff1758fd),
               leftOffset: -30.w,
             )
