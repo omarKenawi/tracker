@@ -1,7 +1,9 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:tracker/features/home/services/local_storage.dart';
 
 class FirebaseAuthServices {
   final FirebaseAuth _auth = FirebaseAuth.instance;
+  final LocalCacheService localCacheService=LocalCacheService();
 
   Future<User?> signUpWithEmailAndPassword(String email, String password) async {
     try {
@@ -26,6 +28,7 @@ class FirebaseAuthServices {
   Future<void> signOut() async {
     try {
       await _auth.signOut();
+      await localCacheService.clearYearlyExpense();
     } catch (e) {
       print("Error signing out: $e");
     }
