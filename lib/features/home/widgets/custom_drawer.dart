@@ -8,14 +8,15 @@ class CustomDrawer extends StatelessWidget {
   Widget build(BuildContext context) {
     return Drawer(
       child: Column(
-        children: <Widget>[
+        children: [
           SizedBox(height: 50.h),
           Expanded(
             child: ListView(
               padding: EdgeInsets.zero,
-              children: <Widget>[
+              children: [
                 ListTile(
-                  contentPadding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 8.h),
+                  contentPadding:
+                      EdgeInsets.symmetric(horizontal: 8.w, vertical: 8.h),
                   leading: Icon(
                     Icons.logout,
                     color: Colors.black,
