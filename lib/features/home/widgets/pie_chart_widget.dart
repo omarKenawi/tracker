@@ -4,12 +4,33 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:tracker/features/home/widgets/pie_chart_info_widget.dart';
 
 class PieChartWidget extends StatelessWidget {
-  const PieChartWidget({super.key, required this.month});
+  const PieChartWidget({
+    super.key,
+    required this.month,
+    required this.homePercentage,
+    required this.clothingPercentage,
+    required this.carPercentage,
+    required this.utilPercentage,
+    required this.eatingPercentage,
+  });
 
   final String month;
+  final int homePercentage;
+  final int clothingPercentage;
+  final int carPercentage;
+  final int utilPercentage;
+  final int eatingPercentage;
 
   @override
   Widget build(BuildContext context) {
+    final data = [
+      Data(name: 'Rent', percent: homePercentage.toDouble(), color: const Color(0xffff6e40)),
+      Data(name: 'Utilities', percent: utilPercentage.toDouble(), color: const Color(0xff1c88e5)),
+      Data(name: 'Clothing', percent: clothingPercentage.toDouble(), color: const Color(0xff00bfa5)),
+      Data(name: 'Car', percent: carPercentage.toDouble(), color: const Color(0xfffbc02e)),
+      Data(name: 'Eating out', percent: eatingPercentage.toDouble(), color: const Color(0xff673ab7)),
+    ];
+
     return Column(
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
@@ -41,7 +62,7 @@ class PieChartWidget extends StatelessWidget {
               width: 120.w,
               child: PieChart(
                 PieChartData(
-                  sections: getSections(),
+                  sections: getSections(data),
                 ),
               ),
             ),
@@ -50,30 +71,37 @@ class PieChartWidget extends StatelessWidget {
             ),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const PieChartInfoWidget(
-                  color:Color(0xff1c88e5) ,
+              children:  [
+                PieChartInfoWidget(
+                  color: Color(0xff1c88e5),
                   text: 'Home',
                 ),
-                SizedBox(height: 10.h,),
-                const PieChartInfoWidget(
-                  color:Color(0xff00bfa5) ,
+                SizedBox(
+                  height: 10.h,
+                ),
+                PieChartInfoWidget(
+                  color: Color(0xff00bfa5),
                   text: 'Auto & Transport',
                 ),
-                SizedBox(height: 10.h,),
-                const PieChartInfoWidget(
-                  color:Color(0xfffbc02e) ,
+                SizedBox(
+                  height: 10.h,
+                ),
+                PieChartInfoWidget(
+                  color: Color(0xfffbc02e),
                   text: 'Cellular & Broadband',
                 ),
-                SizedBox(height: 10.h,),
-                //Colors.red.withOpacity(0.5)
-                const PieChartInfoWidget(
-                  color:Colors.red,
+                SizedBox(
+                  height: 10.h,
+                ),
+                PieChartInfoWidget(
+                  color: Colors.red,
                   text: 'Cellular & Broadband',
                 ),
-                SizedBox(height: 10.h,),
-                const PieChartInfoWidget(
-                  color:Color(0xff673ab7),
+                SizedBox(
+                  height: 10.h,
+                ),
+                PieChartInfoWidget(
+                  color: Color(0xff673ab7),
                   text: 'Travelling',
                 ),
               ],
@@ -83,28 +111,23 @@ class PieChartWidget extends StatelessWidget {
       ],
     );
   }
-}
 
-List<PieChartSectionData> getSections() => PieData.data
-    .asMap()
-    .map<int, PieChartSectionData>((index, data) {
-  final value = PieChartSectionData(
-    color: data.color,
-    value: data.percent,
-    showTitle: false,
-    radius: 40.r,
-  );
-  return MapEntry(index, value);
-}).values.toList();
-
-class PieData {
-  static List<Data> data = [
-    Data(name: 'Rent', percent: 51, color: const Color(0xffff6e40)),
-    Data(name: 'Utilities', percent: 19, color: const Color(0xff1c88e5)),
-    Data(name: 'Clothing', percent: 16, color: const Color(0xff00bfa5)),
-    Data(name: 'Car', percent: 5, color: const Color(0xfffbc02e)),
-    Data(name: 'Eating out', percent: 4, color: const Color(0xff673ab7)),
-  ];
+  List<PieChartSectionData> getSections(List<Data> data) {
+    double radius = 40.r; // Move the .r usage here, where it's not a constant
+    return data
+        .asMap()
+        .map<int, PieChartSectionData>((index, data) {
+      final value = PieChartSectionData(
+        color: data.color,
+        value: data.percent,
+        showTitle: false,
+        radius: radius,  // Use the calculated radius
+      );
+      return MapEntry(index, value);
+    })
+        .values
+        .toList();
+  }
 }
 
 class Data {
