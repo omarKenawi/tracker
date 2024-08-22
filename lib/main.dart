@@ -6,6 +6,8 @@ import 'package:tracker/features/home/screens/home_screen.dart';
 import 'package:tracker/features/auth/screens/login_screen.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import 'features/home/services/get_user_data.dart';
+
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
@@ -43,7 +45,9 @@ class AuthenticationWrapper extends StatelessWidget {
   Widget build(BuildContext context) {
     User? user = FirebaseAuth.instance.currentUser;
     if (user != null) {
+      getUserData();
       return const HomeScreen();
+
     } else {
       return const LoginScreen();
     }
