@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:tracker/features/auth/screens/login_screen.dart';
+import '../../auth/services/firebase_auth_services.dart';
 
 class CustomDrawer extends StatelessWidget {
   const CustomDrawer({super.key});
@@ -15,8 +17,10 @@ class CustomDrawer extends StatelessWidget {
               padding: EdgeInsets.zero,
               children: [
                 ListTile(
-                  contentPadding:
-                      EdgeInsets.symmetric(horizontal: 8.w, vertical: 8.h),
+                  contentPadding: EdgeInsets.symmetric(
+                    horizontal: 8.w,
+                    vertical: 8.h,
+                  ),
                   leading: Icon(
                     Icons.logout,
                     color: Colors.black,
@@ -30,10 +34,14 @@ class CustomDrawer extends StatelessWidget {
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                  onTap: () {
-                    // Implement your logout logic here
-                    print('Logout clicked');
-                    // For example, you might navigate to a login screen or show a confirmation dialog
+                  onTap: () async {
+                    await FirebaseAuthServices().signOut();
+                    Navigator.pushAndRemoveUntil(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const LoginScreen()),
+                      (route) => false,
+                    );
                   },
                 ),
               ],

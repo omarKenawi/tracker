@@ -15,10 +15,15 @@ class ExpensesScreen extends StatelessWidget {
         child: Column(
           children: [
             const CascadingCardWidget(),
-            SizedBox(height: 10.h),
+            SizedBox(
+              height: 10.h,
+            ),
             InfoCard(
-              imageIcon: Image.asset('lib/assets/house.png',
-                  width: 24.w, height: 24.h),
+              imageIcon: Image.asset(
+                'lib/assets/house.png',
+                width: 24.w,
+                height: 24.h,
+              ),
               iconBackgroundColor: Colors.deepOrangeAccent.shade200,
               title: 'RENT/LOAN',
               percentage: '51%',
@@ -61,7 +66,7 @@ class ExpensesScreen extends StatelessWidget {
             ),
             SizedBox(
               height: 20.h,
-            ), // Add some spacing before the button
+            ),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 8),
               child: ElevatedButton(

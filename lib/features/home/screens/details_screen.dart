@@ -13,7 +13,7 @@ class DetailsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      drawer: const CustomDrawer(), // Use the custom drawer
+      drawer: const CustomDrawer(),
       appBar: AppBar(
         elevation: 0,
         backgroundColor: Colors.white,
@@ -69,7 +69,7 @@ class DetailsScreen extends StatelessWidget {
                       fontWeight: FontWeight.bold,
                       fontSize: 22.sp,
                       color:
-                          const Color(0xff1951d1), // This is the correct format
+                          const Color(0xff1951d1),
                     ),
                   ),
                   FinancialRow(
@@ -83,8 +83,6 @@ class DetailsScreen extends StatelessWidget {
                     valueStyle: TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 22.sp,
-                      color:
-                          const Color(0xff000000), // This is the correct format
                     ),
                   ),
                   SizedBox(
@@ -110,7 +108,7 @@ class DetailsScreen extends StatelessWidget {
                     spentAmount: 2523,
                     balanceAmount: 6023,
                     earnedProgressWidth: 80.w,
-                    spentProgressWidth: 50.w, // Example width for spent bar
+                    spentProgressWidth: 50.w,
                   ),
                   SizedBox(
                     height: 5.h,
