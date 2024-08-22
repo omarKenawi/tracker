@@ -1,18 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:intl/intl.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:tracker/firebase_options.dart';
 import 'package:tracker/features/home/screens/home_screen.dart';
 import 'package:tracker/features/auth/screens/login_screen.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
-import 'features/home/services/get_user_data.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+  await SharedPreferences.getInstance();
   runApp(const MyApp());
 }
 
@@ -45,7 +46,8 @@ class AuthenticationWrapper extends StatelessWidget {
   Widget build(BuildContext context) {
     User? user = FirebaseAuth.instance.currentUser;
     if (user != null) {
-      getUserData();
+      // print(DateTime.now().month.toString());
+
       return const HomeScreen();
 
     } else {
