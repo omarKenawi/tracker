@@ -4,6 +4,7 @@ import '../widgets/budget_progress.dart';
 import '../widgets/cash_flow_widget.dart';
 import '../widgets/custom_drawer.dart';
 import '../widgets/financial_row.dart';
+import '../widgets/pie_chart_widget.dart';
 
 class DetailsScreen extends StatelessWidget {
   const DetailsScreen({super.key});
@@ -36,83 +37,100 @@ class DetailsScreen extends StatelessWidget {
           ),
         ),
       ),
-      body: Column(
-        children: [
-          Padding(
-            padding: const EdgeInsets.all(12.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  'ACCOUNTS',
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 17.sp,
+      body: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+
+          children: [
+            Padding(
+              padding: const EdgeInsets.all(12.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    'ACCOUNTS',
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 17.sp,
+                    ),
                   ),
-                ),
-                SizedBox(
-                  height: 5.h,
-                ),
-                FinancialRow(
-                  label: 'Cash',
-                  value: '\$16,875',
-                  labelStyle: TextStyle(
-                    fontWeight: FontWeight.normal,
-                    fontSize: 18.sp,
-                    color: Colors.grey,
+                  SizedBox(
+                    height: 5.h,
                   ),
-                  valueStyle: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 22.sp,
-                    color:
-                        const Color(0xff1951d1), // This is the correct format
+                  FinancialRow(
+                    label: 'Cash',
+                    value: '\$16,875',
+                    labelStyle: TextStyle(
+                      fontWeight: FontWeight.normal,
+                      fontSize: 18.sp,
+                      color: Colors.grey,
+                    ),
+                    valueStyle: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 22.sp,
+                      color:
+                          const Color(0xff1951d1), // This is the correct format
+                    ),
                   ),
-                ),
-                FinancialRow(
-                  label: 'Credit Debt',
-                  value: '-\$3,250',
-                  labelStyle: TextStyle(
-                    fontWeight: FontWeight.normal,
-                    fontSize: 18.sp,
-                    color: Colors.grey,
+                  FinancialRow(
+                    label: 'Credit Debt',
+                    value: '-\$3,250',
+                    labelStyle: TextStyle(
+                      fontWeight: FontWeight.normal,
+                      fontSize: 18.sp,
+                      color: Colors.grey,
+                    ),
+                    valueStyle: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 22.sp,
+                      color:
+                          const Color(0xff000000), // This is the correct format
+                    ),
                   ),
-                  valueStyle: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 22.sp,
-                    color:
-                        const Color(0xff000000), // This is the correct format
+                  SizedBox(
+                    height: 5.h,
                   ),
-                ),
-                SizedBox(
-                  height: 5.h,
-                ),
-                const Divider(),
-                SizedBox(
-                  height: 5.h,
-                ),
-                const BudgetProgress(
-                  percentage: .5,
-                  month: 'March',
-                ),
-                SizedBox(
-                  height: 5.h,
-                ),
-                const Divider(),
-                CashFlowWidget(
-                  earnedAmount: 8523,
-                  spentAmount: 2523,
-                  balanceAmount: 6023,
-                  earnedProgressWidth: 80.w,
-                  spentProgressWidth: 50.w, // Example width for spent bar
-                ),
-                SizedBox(
-                  height: 5.h,
-                ),
-                const Divider(),
-              ],
-            ),
-          )
-        ],
+                  const Divider(),
+                  SizedBox(
+                    height: 5.h,
+                  ),
+                  const BudgetProgress(
+                    percentage: .9,
+                    month: 'March',
+                  ),
+                  SizedBox(
+                    height: 5.h,
+                  ),
+                  const Divider(),
+                  SizedBox(
+                    height: 5.h,
+                  ),
+                  CashFlowWidget(
+                    earnedAmount: 8523,
+                    spentAmount: 2523,
+                    balanceAmount: 6023,
+                    earnedProgressWidth: 80.w,
+                    spentProgressWidth: 50.w, // Example width for spent bar
+                  ),
+                  SizedBox(
+                    height: 5.h,
+                  ),
+                  const Divider(),
+                  SizedBox(
+                    height: 5.h,
+                  ),
+                  PieChartWidget(
+                    month: 'March',
+                  ),
+                  const Divider(),
+                  SizedBox(
+                    height: 5.h,
+                  ),
+                ],
+              ),
+            )
+          ],
+        ),
       ),
     );
   }
