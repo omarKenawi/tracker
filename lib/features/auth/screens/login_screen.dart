@@ -18,6 +18,7 @@ class _LoginPageState extends State<LoginScreen> {
   final FirebaseAuthServices _auth = FirebaseAuthServices();
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   final FocusNode _passwordFocusNode = FocusNode();
+  final FocusNode _emailFocusNode = FocusNode();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
 
@@ -34,25 +35,25 @@ class _LoginPageState extends State<LoginScreen> {
     return Scaffold(
       body: Center(
         child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 15.w), // Responsive padding
+          padding: EdgeInsets.symmetric(horizontal: 15.w),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text(
                 "Login",
                 style: TextStyle(
-                  fontSize: 27.sp, // Responsive font size
+                  fontSize: 27.sp,
                   fontWeight: FontWeight.bold,
                 ),
               ),
-              SizedBox(height: 30.h), // Responsive spacing
+              SizedBox(height: 30.h),
               Form(
                 key: _formKey,
                 child: Column(
                   children: [
                     FormContainerWidget(
                       controller: _emailController,
-                      focusNode: FocusNode(),
+                      focusNode: _emailFocusNode,
                       nextFocusNode: _passwordFocusNode,
                       hintText: "Email",
                       isPasswordField: false,
@@ -70,14 +71,14 @@ class _LoginPageState extends State<LoginScreen> {
               SizedBox(height: 30.h), // Responsive spacing
               GestureDetector(
                 onTap: () {
-                  // Unfocus to hide the keyboard
                   FocusScope.of(context).unfocus();
-
                   if (_formKey.currentState?.validate() ?? false) {
                     _signIn();
                   } else {
                     ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(content: Text('Please fix the errors in red before submitting.')),
+                      const SnackBar(
+                          content: Text(
+                              'Please fix the errors in red before submitting.')),
                     );
                   }
                 },
@@ -86,21 +87,22 @@ class _LoginPageState extends State<LoginScreen> {
                   height: 45.h, // Responsive height
                   decoration: BoxDecoration(
                     color: Colors.blue,
-                    borderRadius: BorderRadius.circular(10.r), // Responsive radius
+                    borderRadius:
+                        BorderRadius.circular(10.r), // Responsive radius
                   ),
                   child: Center(
                     child: _isSigning
                         ? const CircularProgressIndicator(
-                      color: Colors.white,
-                    )
+                            color: Colors.white,
+                          )
                         : Text(
-                      "Login",
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 16.sp, // Responsive font size
-                      ),
-                    ),
+                            "Login",
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 16.sp, // Responsive font size
+                            ),
+                          ),
                   ),
                 ),
               ),
