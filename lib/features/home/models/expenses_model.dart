@@ -1,76 +1,95 @@
-class Expenses {
-  int year;
-  Map<String, MonthExpenses> months;
+class Expense {
+  final int car;
+  final int cash;
+  final int clothes;
+  final int dept;
+  final int earned;
+  final int eat;
+  final int rent;
+  final int total;
+  final int util;
 
-  Expenses({
-    required this.year,
-    required this.months,
+  Expense({
+    required this.car,
+    required this.cash,
+    required this.clothes,
+    required this.dept,
+    required this.earned,
+    required this.eat,
+    required this.rent,
+    required this.total,
+    required this.util,
   });
 
-  factory Expenses.fromFirestore(Map<String, dynamic> map) {
-    return Expenses(
-      year: map['year'],
-      months: (map['months'] as Map<String, dynamic>).map(
-            (key, value) => MapEntry(key, MonthExpenses.fromFirestore(value)),
-      ),
+  factory Expense.fromMap(Map<String, dynamic> data) {
+    return Expense(
+      car: data['car'],
+      cash: data['cash'],
+      clothes: data['clothes'],
+      dept: data['dept'],
+      earned: data['earned'],
+      eat: data['eat'],
+      rent: data['rent'],
+      total: data['total'],
+      util: data['util'],
     );
   }
 
   Map<String, dynamic> toMap() {
     return {
-      'year': year,
-      'months': months.map((key, value) => MapEntry(key, value.toMap())),
+      'car': car,
+      'cash': cash,
+      'clothes': clothes,
+      'dept': dept,
+      'earned': earned,
+      'eat': eat,
+      'rent': rent,
+      'total': total,
+      'util': util,
     };
   }
 }
 
-class MonthExpenses {
-  int earned;
-  int total;
-  int util;
-  int car;
-  int eat;
-  int dept;
-  int rent;
-  int cash;
-  int clothes;
+class MonthlyExpense {
+  final Map<String, Expense> months;
 
-  MonthExpenses({
-    required this.earned,
-    required this.total,
-    required this.util,
-    required this.car,
-    required this.eat,
-    required this.dept,
-    required this.rent,
-    required this.cash,
-    required this.clothes,
-  });
+  MonthlyExpense({required this.months});
 
-  factory MonthExpenses.fromFirestore(Map<String, dynamic> map) {
-    return MonthExpenses(
-      earned: map['earned'],
-      total: map['total'],
-      util: map['util'],
-      car: map['car'],
-      eat: map['eat'],
-      dept: map['dept'],
-      rent: map['rent'],
-      cash: map['cash'],
-      clothes: map['clothes'],
-    );
+  factory MonthlyExpense.fromMap(Map<String, dynamic> data) {
+    final Map<String, Expense> months = {};
+    data.forEach((month, expenseData) {
+      months[month] = Expense.fromMap(expenseData);
+    });
+    return MonthlyExpense(months: months);
   }
+
   Map<String, dynamic> toMap() {
-    return {
-      'earned': earned,
-      'total': total,
-      'util': util,
-      'car': car,
-      'eat': eat,
-      'dept': dept,
-      'rent': rent,
-      'cash': cash,
-      'clothes': clothes,
-    };
+    final Map<String, dynamic> data = {};
+    months.forEach((month, expense) {
+      data[month] = expense.toMap();
+    });
+    return data;
+  }
+}
+
+class YearlyExpense {
+  final Map<String, MonthlyExpense> years;
+
+  YearlyExpense({required this.years});
+
+  factory YearlyExpense.fromMap(Map<String, dynamic> data) {
+    final Map<String, MonthlyExpense> years = {};
+    data.forEach((year, monthlyData) {
+      years[year] = MonthlyExpense.fromMap(monthlyData);
+    });
+    return YearlyExpense(years: years);
+  }
+
+  Map<String, dynamic> toMap() {
+    final Map<String, dynamic> data = {};
+    years.forEach((year, monthlyExpense) {
+      data[year] = monthlyExpense.toMap();
+    });
+    return data;
   }
 }
