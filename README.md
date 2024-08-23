@@ -20,9 +20,9 @@ There is currently one user in the system:
 - **Password**: 123456
 
 ## Screenshots
-<img src="https://github.com/user-attachments/assets/291f6827-571a-480a-9a7a-d2cb568e9e71" width="33.33%">
-<img src="https://github.com/user-attachments/assets/ab1d5895-74d5-4969-930c-6774f011dd2f" width="33.33%">
-<img src="https://github.com/user-attachments/assets/1ad006fc-1971-461f-8d4d-f1df1d51d9a4" width="33.33%">
+<img src="https://github.com/user-attachments/assets/291f6827-571a-480a-9a7a-d2cb568e9e71" width="28%">
+<img src="https://github.com/user-attachments/assets/ab1d5895-74d5-4969-930c-6774f011dd2f" width="28%">
+<img src="https://github.com/user-attachments/assets/1ad006fc-1971-461f-8d4d-f1df1d51d9a4" width="28%">
 
 ## Getting Started
 
