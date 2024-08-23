@@ -21,7 +21,7 @@ class CascadingCardWidget extends StatelessWidget {
 
     return Center(
       child: SizedBox(
-        height: 200,
+        height: 200.h,
         child: Stack(
           children: [
             VisaCard(
