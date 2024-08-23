@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:intl/intl.dart';
 
 import '../models/expenses_model.dart';
 import 'visa_card.dart';
@@ -10,18 +11,26 @@ class CascadingCardWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final numberFormat = NumberFormat('#,###');
+
+    // Get the current month and previous month
+    final now = DateTime.now();
+    final currentMonth = DateFormat('MMMM').format(now).toUpperCase();
+    final previousMonth = DateFormat('MMMM').format(DateTime(now.year, now.month - 1)).toUpperCase();
+    final previousMonth2 = DateFormat('MMMM').format(DateTime(now.year, now.month - 2)).toUpperCase();
+
     return Center(
       child: SizedBox(
         height: 200,
         child: Stack(
           children: [
             VisaCard(
-              month: 'oct',
+              month: currentMonth,
               color: const Color(0xff73caf1),
               leftOffset: 100.w,
             ),
             VisaCard(
-              month: 'oct',
+              month: previousMonth,
               color: const Color(0xff73caf1),
               leftOffset: 100.w,
             ),
@@ -41,18 +50,18 @@ class CascadingCardWidget extends StatelessWidget {
               leftOffset: 70.w,
             ),
             VisaCard(
-              month: 'JUL',
+              month: previousMonth2,
               color: const Color(0xffffbb33),
               leftOffset: 50.w,
             ),
             VisaCard(
-              month: 'AUG',
+              month: previousMonth,
               color: const Color(0xff01f6dc),
               leftOffset: 20.w,
             ),
             VisaCard(
-              month: 'September',
-              amount: '\$${expense.dept}',
+              month: currentMonth,
+              amount: '\$${numberFormat.format(expense.dept)}',
               color: const Color(0xff1758fd),
               leftOffset: -30.w,
             )

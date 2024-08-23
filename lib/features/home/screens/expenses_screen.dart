@@ -43,7 +43,6 @@ class ExpensesScreen extends StatelessWidget {
               if (currentYearExpenses == null) {
                 return const Center(child: Text('No data for this year'));
               }
-
               DateTime now = DateTime.now();
               DateFormat monthNameFormat = DateFormat('MMM');
               String monthName = monthNameFormat.format(now);
@@ -62,36 +61,39 @@ class ExpensesScreen extends StatelessWidget {
                       ),
                       iconBackgroundColor: Colors.deepOrangeAccent.shade200,
                       title: 'RENT/LOAN',
-                      percentage: '${(monthlyExpenses.rent*100/monthlyExpenses.total).round()}%',
-                      money: '-\$${monthlyExpenses.rent}',
+                      total: monthlyExpenses.total,
+                      money: monthlyExpenses.rent,
                     ),
                     InfoCard(
                       imageIcon: Image.asset('lib/assets/lightbulb.png', width: 24.w, height: 24.h),
                       iconBackgroundColor: Colors.blue[600]!,
                       title: 'UTILITIES',
-                      percentage: '${(monthlyExpenses.util*100/monthlyExpenses.total).round()}%',
-                      money: '-\$${monthlyExpenses.util}',
+                      money: monthlyExpenses.util,
+                      total: monthlyExpenses.total,
+
                     ),
                     InfoCard(
                       imageIcon: Image.asset('lib/assets/polo.png', width: 24.w, height: 24.h),
                       iconBackgroundColor: Colors.tealAccent.shade700,
                       title: 'CLOTHING',
-                      percentage: '${(monthlyExpenses.clothes*100/monthlyExpenses.total).round()}%',
-                      money: '-\$${monthlyExpenses.clothes}',
+                      money: monthlyExpenses.clothes,
+                      total: monthlyExpenses.total,
+
                     ),
                     InfoCard(
                       imageIcon: Image.asset('lib/assets/sedan.png', width: 24.w, height: 24.h),
                       iconBackgroundColor: Colors.yellow.shade700,
                       title: 'CAR',
-                      percentage: '${(monthlyExpenses.car*100/monthlyExpenses.total).round()}%',
-                      money: '-\$${monthlyExpenses.car}',
+                      money: monthlyExpenses.car,
+                      total: monthlyExpenses.total,
                     ),
                     InfoCard(
                       imageIcon: Image.asset('lib/assets/burger.png', width: 24.w, height: 24.h),
                       iconBackgroundColor: Colors.deepPurple,
                       title: 'EATING OUT',
-                      percentage: '${(monthlyExpenses.eat*100/monthlyExpenses.total).round()}%',
-                      money: '-\$${monthlyExpenses.eat}',
+                      money: monthlyExpenses.eat,
+                      total: monthlyExpenses.total,
+
                     ),
                     SizedBox(height: 20.h),
                     Padding(

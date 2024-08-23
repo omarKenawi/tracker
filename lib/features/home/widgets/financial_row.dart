@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:intl/intl.dart';
 
 class FinancialRow extends StatelessWidget {
   final String label;
-  final String value;
+  final int value;
   final TextStyle labelStyle;
   final TextStyle valueStyle;
 
@@ -17,6 +18,9 @@ class FinancialRow extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final numberFormat = NumberFormat('#,##0');
+    String formattedValue = numberFormat.format(value);
+
     return Column(
       children: [
         Row(
@@ -27,7 +31,7 @@ class FinancialRow extends StatelessWidget {
             ),
             const Spacer(),
             Text(
-              value,
+              '-\$${formattedValue}',
               style: valueStyle,
             ),
           ],

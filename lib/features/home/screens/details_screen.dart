@@ -97,7 +97,7 @@ class DetailsScreen extends StatelessWidget {
                           SizedBox(height: 5.h),
                           FinancialRow(
                             label: 'Cash',
-                            value: '\$${monthlyExpenses.cash}',
+                            value: monthlyExpenses.earned,
                             labelStyle: TextStyle(
                               fontWeight: FontWeight.normal,
                               fontSize: 18.sp,
@@ -111,7 +111,7 @@ class DetailsScreen extends StatelessWidget {
                           ),
                           FinancialRow(
                             label: 'Credit Debt',
-                            value: '-\$${monthlyExpenses.dept}',
+                            value: monthlyExpenses.dept,
                             labelStyle: TextStyle(
                               fontWeight: FontWeight.normal,
                               fontSize: 18.sp,
@@ -126,7 +126,7 @@ class DetailsScreen extends StatelessWidget {
                           const Divider(),
                           SizedBox(height: 5.h),
                           BudgetProgress(
-                            percentage: .9,
+                            percentage: 19/30,
                             month: DateFormat('MMMM').format(DateTime.now()),
                           ),
                           SizedBox(height: 5.h),

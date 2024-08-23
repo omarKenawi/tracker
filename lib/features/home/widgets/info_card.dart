@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:intl/intl.dart';
 
 class InfoCard extends StatelessWidget {
   final Widget? imageIcon;
   final IconData? icon;
   final Color iconBackgroundColor;
   final String title;
-  final String percentage;
-  final String money;
+  final int money;
+  final int total;
 
   const InfoCard({
     super.key,
@@ -15,12 +16,15 @@ class InfoCard extends StatelessWidget {
     this.icon,
     required this.iconBackgroundColor,
     required this.title,
-    required this.percentage,
     required this.money,
-  }) : assert(imageIcon != null || icon != null, 'Either imageIcon or icon must be provided.');
+    required this.total,
+  }) : assert(imageIcon != null || icon != null);
 
   @override
   Widget build(BuildContext context) {
+    // Create an instance of NumberFormat
+    final numberFormat = NumberFormat('#,###');
+
     return Container(
       decoration: BoxDecoration(
         color: Colors.white,
@@ -67,7 +71,7 @@ class InfoCard extends StatelessWidget {
                   ),
                   SizedBox(height: 5.h),
                   Text(
-                    percentage,
+                    '${(money * 100 / total).round()} %',
                     style: TextStyle(
                       fontSize: 14.sp,
                       color: Colors.grey,
@@ -77,7 +81,7 @@ class InfoCard extends StatelessWidget {
               ),
             ),
             Text(
-              money,
+              '-\$${numberFormat.format(money)}', // Format the money value
               style: TextStyle(
                 fontWeight: FontWeight.bold,
                 fontSize: 16.sp,

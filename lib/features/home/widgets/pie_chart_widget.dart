@@ -24,10 +24,10 @@ class PieChartWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final data = [
-      Data(name: 'Rent', percent: homePercentage.toDouble(), color: const Color(0xffff6e40)),
-      Data(name: 'Utilities', percent: utilPercentage.toDouble(), color: const Color(0xff1c88e5)),
-      Data(name: 'Clothing', percent: clothingPercentage.toDouble(), color: const Color(0xff00bfa5)),
-      Data(name: 'Car', percent: carPercentage.toDouble(), color: const Color(0xfffbc02e)),
+      Data(name: 'Rent', percent: homePercentage.toDouble(), color: const Color(0xff1c88e5)),
+      Data(name: 'Utilities', percent: utilPercentage.toDouble(), color: const Color(0xffff6e40)),
+      Data(name: 'Clothing', percent: clothingPercentage.toDouble(), color:const Color(0xfffbc02e)),
+      Data(name: 'Car', percent: carPercentage.toDouble(), color: const Color(0xff00bfa5)),
       Data(name: 'Eating out', percent: eatingPercentage.toDouble(), color: const Color(0xff673ab7)),
     ];
 
@@ -72,35 +72,35 @@ class PieChartWidget extends StatelessWidget {
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children:  [
-                PieChartInfoWidget(
+                const PieChartInfoWidget(
                   color: Color(0xff1c88e5),
                   text: 'Home',
                 ),
                 SizedBox(
                   height: 10.h,
                 ),
-                PieChartInfoWidget(
+                const PieChartInfoWidget(
                   color: Color(0xff00bfa5),
                   text: 'Auto & Transport',
                 ),
                 SizedBox(
                   height: 10.h,
                 ),
-                PieChartInfoWidget(
+                const PieChartInfoWidget(
                   color: Color(0xfffbc02e),
                   text: 'Cellular & Broadband',
                 ),
                 SizedBox(
                   height: 10.h,
                 ),
-                PieChartInfoWidget(
+                const PieChartInfoWidget(
                   color: Colors.red,
-                  text: 'Cellular & Broadband',
+                  text: 'Hotel & Restaurant',
                 ),
                 SizedBox(
                   height: 10.h,
                 ),
-                PieChartInfoWidget(
+                const PieChartInfoWidget(
                   color: Color(0xff673ab7),
                   text: 'Travelling',
                 ),
@@ -121,7 +121,7 @@ class PieChartWidget extends StatelessWidget {
         color: data.color,
         value: data.percent,
         showTitle: false,
-        radius: radius,  // Use the calculated radius
+        radius: radius,
       );
       return MapEntry(index, value);
     })
