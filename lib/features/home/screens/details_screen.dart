@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
+
+import '../repositories/expense_repository.dart';
 import '../services/expenses_cubit.dart';
 import '../services/expenses_state.dart';
 import '../services/local_storage.dart';
@@ -20,11 +22,14 @@ class DetailsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final user = FirebaseAuth.instance.currentUser;
 
-
     return BlocProvider(
       create: (context) => YearlyExpenseCubit(
-          FirebaseFirestore.instance, user!.uid, LocalCacheService())
-        ..fetchYearlyExpense(),
+        ExpenseRepository(
+          firestore: FirebaseFirestore.instance,
+          userId: user!.uid,
+        ),
+        LocalCacheService(),
+      )..fetchYearlyExpense(),
       child: BlocBuilder<YearlyExpenseCubit, YearlyExpenseState>(
         builder: (context, state) {
           if (state is YearlyExpenseLoading) {
@@ -36,12 +41,12 @@ class DetailsScreen extends StatelessWidget {
           } else if (state is YearlyExpenseLoaded) {
             var yearlyExpenses = state.yearlyExpense.years;
             var currentYearExpenses =
-                yearlyExpenses[DateTime.now().year.toString()];
+            yearlyExpenses[DateTime.now().year.toString()];
             DateTime now = DateTime.now();
             DateFormat monthNameFormat = DateFormat('MMM');
             String monthName = monthNameFormat.format(now);
             var monthlyExpenses =
-                currentYearExpenses!.months[monthName.toLowerCase()];
+            currentYearExpenses!.months[monthName.toLowerCase()];
             if (monthlyExpenses == null) {
               return const Scaffold(
                 body: Center(child: Text('No data for this month')),
@@ -120,7 +125,7 @@ class DetailsScreen extends StatelessWidget {
                           SizedBox(height: 5.h),
                           const Divider(),
                           SizedBox(height: 5.h),
-                           BudgetProgress(
+                          BudgetProgress(
                             percentage: .9,
                             month: DateFormat('MMMM').format(DateTime.now()),
                           ),
@@ -138,11 +143,11 @@ class DetailsScreen extends StatelessWidget {
                           SizedBox(height: 5.h),
                           PieChartWidget(
                             month: DateFormat('MMMM').format(DateTime.now()),
-                            carPercentage: (monthlyExpenses.car*100/monthlyExpenses.total).round(),
-                            clothingPercentage: (monthlyExpenses.clothes*100/monthlyExpenses.total).round(),
-                            eatingPercentage:(monthlyExpenses.eat*100/monthlyExpenses.total).round() ,
-                            homePercentage: (monthlyExpenses.rent*100/monthlyExpenses.total).round(),
-                            utilPercentage:(monthlyExpenses.util*100/monthlyExpenses.total).round() ,
+                            carPercentage: (monthlyExpenses.car * 100 / monthlyExpenses.total).round(),
+                            clothingPercentage: (monthlyExpenses.clothes * 100 / monthlyExpenses.total).round(),
+                            eatingPercentage: (monthlyExpenses.eat * 100 / monthlyExpenses.total).round(),
+                            homePercentage: (monthlyExpenses.rent * 100 / monthlyExpenses.total).round(),
+                            utilPercentage: (monthlyExpenses.util * 100 / monthlyExpenses.total).round(),
                           ),
                           const Divider(),
                           SizedBox(height: 5.h),

@@ -7,6 +7,7 @@ import 'package:intl/intl.dart';
 import 'package:tracker/features/home/screens/details_screen.dart';
 import 'package:tracker/features/home/services/expenses_cubit.dart';
 import 'package:tracker/features/home/services/local_storage.dart';
+import '../repositories/expense_repository.dart';
 import '../services/expenses_state.dart';
 import '../widgets/cascading_card_widget.dart';
 import '../widgets/info_card.dart';
@@ -17,8 +18,13 @@ class ExpensesScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => YearlyExpenseCubit(FirebaseFirestore.instance, FirebaseAuth.instance.currentUser!.uid,LocalCacheService())
-        ..fetchYearlyExpense(),
+        create: (context) => YearlyExpenseCubit(
+      ExpenseRepository(
+        firestore: FirebaseFirestore.instance,
+        userId: FirebaseAuth.instance.currentUser!.uid,
+      ),
+      LocalCacheService(),
+    )..fetchYearlyExpense(),
       child: Scaffold(
         backgroundColor: Colors.white,
         body: BlocBuilder<YearlyExpenseCubit, YearlyExpenseState>(
@@ -37,6 +43,7 @@ class ExpensesScreen extends StatelessWidget {
               if (currentYearExpenses == null) {
                 return const Center(child: Text('No data for this year'));
               }
+
               DateTime now = DateTime.now();
               DateFormat monthNameFormat = DateFormat('MMM');
               String monthName = monthNameFormat.format(now);
